@@ -43,6 +43,9 @@
 		0778E3C11E88EECC00BF38C5 /* sully-small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0778E3A71E88EECC00BF38C5 /* sully-small.jpg */; };
 		0778E3C21E88EECC00BF38C5 /* sully-wide.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0778E3A81E88EECC00BF38C5 /* sully-wide.jpg */; };
 		AC5083B52072E54700561150 /* theaters.xml in Resources */ = {isa = PBXBuildFile; fileRef = AC5083B42072E54700561150 /* theaters.xml */; };
+		AC5083B72072E7CF00561150 /* TheatersMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5083B62072E7CF00561150 /* TheatersMapViewController.swift */; };
+		AC5083B92072ECA500561150 /* Theater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5083B82072ECA500561150 /* Theater.swift */; };
+		AC9059772072F7AB005663B9 /* TheaterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9059762072F7AB005663B9 /* TheaterAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,9 @@
 		0778E3A71E88EECC00BF38C5 /* sully-small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sully-small.jpg"; sourceTree = "<group>"; };
 		0778E3A81E88EECC00BF38C5 /* sully-wide.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sully-wide.jpg"; sourceTree = "<group>"; };
 		AC5083B42072E54700561150 /* theaters.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = theaters.xml; sourceTree = "<group>"; };
+		AC5083B62072E7CF00561150 /* TheatersMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatersMapViewController.swift; sourceTree = "<group>"; };
+		AC5083B82072ECA500561150 /* Theater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theater.swift; sourceTree = "<group>"; };
+		AC9059762072F7AB005663B9 /* TheaterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,11 +125,14 @@
 				0778E3C31E88EEE700BF38C5 /* images */,
 				0703AD921E854AE4001FB5FD /* movies.json */,
 				AC5083B42072E54700561150 /* theaters.xml */,
+				AC5083B82072ECA500561150 /* Theater.swift */,
+				AC9059762072F7AB005663B9 /* TheaterAnnotation.swift */,
 				07780D4C1E6D860E00BC3630 /* AppDelegate.swift */,
 				0778E36E1E88B48500BF38C5 /* Movie.swift */,
 				07780D4E1E6D860E00BC3630 /* MovieViewController.swift */,
 				0703AD961E8553B2001FB5FD /* MoviesTableViewController.swift */,
 				0778E3701E88D4DA00BF38C5 /* MovieTableViewCell.swift */,
+				AC5083B62072E7CF00561150 /* TheatersMapViewController.swift */,
 				07780D501E6D860E00BC3630 /* Main.storyboard */,
 				07780D531E6D860E00BC3630 /* Assets.xcassets */,
 				07780D551E6D860E00BC3630 /* LaunchScreen.storyboard */,
@@ -267,9 +276,12 @@
 			files = (
 				0778E3711E88D4DB00BF38C5 /* MovieTableViewCell.swift in Sources */,
 				0703AD971E8553B2001FB5FD /* MoviesTableViewController.swift in Sources */,
+				AC9059772072F7AB005663B9 /* TheaterAnnotation.swift in Sources */,
 				07780D4F1E6D860E00BC3630 /* MovieViewController.swift in Sources */,
+				AC5083B92072ECA500561150 /* Theater.swift in Sources */,
 				0778E36F1E88B48500BF38C5 /* Movie.swift in Sources */,
 				07780D4D1E6D860E00BC3630 /* AppDelegate.swift in Sources */,
+				AC5083B72072E7CF00561150 /* TheatersMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
