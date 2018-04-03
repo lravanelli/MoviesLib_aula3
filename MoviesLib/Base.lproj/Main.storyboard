@@ -267,6 +267,9 @@
                                     <constraint firstAttribute="height" constant="56" id="EKz-Up-e78"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="abS-UD-HX7" id="4LY-Cn-o83"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
