@@ -172,6 +172,7 @@ extension TheatersMapViewController : UISearchBarDelegate {
                     self.poiAnnotation.append(place)
                 }
                 self.mapView.addAnnotations(self.poiAnnotation)
+                //print
             }
         }
     }
