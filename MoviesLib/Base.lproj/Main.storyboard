@@ -54,7 +54,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOD-wL-O2h">
                                             <rect key="frame" x="86" y="78" width="224" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="1" green="0.80784313725490198" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="1" green="0.80784313730000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -261,7 +261,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ayz-oe-bWx">
                                 <rect key="frame" x="0.0" y="76" width="320" height="443"/>
                             </mapView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Gen-tY-wyk">
+                            <searchBar contentMode="redraw" placeholder="Digite o ponto de interesse" translatesAutoresizingMaskIntoConstraints="NO" id="Gen-tY-wyk">
                                 <rect key="frame" x="0.0" y="20" width="320" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="EKz-Up-e78"/>
@@ -292,6 +292,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aCb-i4-ENJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="375" y="-192.25352112676057"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Jil-2f-Igb">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="ilk-gT-cm3" customClass="WebViewController" customModule="MoviesLib" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y4Z-bA-8Pp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4pD-Wn-bUh">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="GQH-fE-ezT"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="teS-nA-eIi"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="inh-4m-fD8"/>
+                                    <barButtonItem title="Executar JS" id="tP6-SO-RIU"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tTP-bJ-WQQ"/>
+                                    <barButtonItem systemItem="fastForward" id="7SI-GW-y0z"/>
+                                </items>
+                            </toolbar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1z-cT-0k2">
+                                <rect key="frame" x="0.0" y="60" width="320" height="464"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ilk-gT-cm3" id="7Qa-1E-bYv"/>
+                                </connections>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Tj3-DM-3FR">
+                                <rect key="frame" x="142" y="273.5" width="37" height="37"/>
+                                <color key="color" red="1" green="0.53132661411704574" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXE-8Y-TuK">
+                                <rect key="frame" x="9" y="30" width="48" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Udl-hw-vZh"/>
+                                </constraints>
+                                <state key="normal" title="Fechar"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tj3-DM-3FR" firstAttribute="centerX" secondItem="u1z-cT-0k2" secondAttribute="centerX" id="3ca-6R-hwo"/>
+                            <constraint firstItem="Tj3-DM-3FR" firstAttribute="centerY" secondItem="u1z-cT-0k2" secondAttribute="centerY" id="77C-m7-xNc"/>
+                            <constraint firstItem="evz-FQ-xib" firstAttribute="trailing" secondItem="u1z-cT-0k2" secondAttribute="trailing" id="DaI-0u-hSF"/>
+                            <constraint firstItem="u1z-cT-0k2" firstAttribute="top" secondItem="PXE-8Y-TuK" secondAttribute="bottom" id="OPZ-LU-sni"/>
+                            <constraint firstItem="4pD-Wn-bUh" firstAttribute="bottom" secondItem="evz-FQ-xib" secondAttribute="bottom" id="ZNV-Rz-XEx"/>
+                            <constraint firstItem="PXE-8Y-TuK" firstAttribute="leading" secondItem="y4Z-bA-8Pp" secondAttribute="leading" constant="9" id="eCv-kF-c4T"/>
+                            <constraint firstItem="4pD-Wn-bUh" firstAttribute="top" secondItem="u1z-cT-0k2" secondAttribute="bottom" id="eFF-nd-dzU"/>
+                            <constraint firstItem="u1z-cT-0k2" firstAttribute="leading" secondItem="evz-FQ-xib" secondAttribute="leading" id="epK-gf-OwY"/>
+                            <constraint firstItem="4pD-Wn-bUh" firstAttribute="trailing" secondItem="evz-FQ-xib" secondAttribute="trailing" id="j21-P6-gFc"/>
+                            <constraint firstItem="PXE-8Y-TuK" firstAttribute="top" secondItem="evz-FQ-xib" secondAttribute="top" constant="10" id="jzb-eH-Cx0"/>
+                            <constraint firstItem="4pD-Wn-bUh" firstAttribute="leading" secondItem="evz-FQ-xib" secondAttribute="leading" id="omR-eg-D1g"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="evz-FQ-xib"/>
+                    </view>
+                    <connections>
+                        <outlet property="loading" destination="Tj3-DM-3FR" id="PpX-f3-hoZ"/>
+                        <outlet property="webView" destination="u1z-cT-0k2" id="T3f-jy-L8c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KQJ-UI-gvu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1046.25" y="-192.25352112676057"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="SEm-1D-H4b">

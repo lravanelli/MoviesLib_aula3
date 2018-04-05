@@ -47,7 +47,7 @@ class TheatersMapViewController: UIViewController {
     func addTheaters() {
         for theater in theaters {
             let coordinate = CLLocationCoordinate2D(latitude: theater.latitude, longitude: theater.longitude)
-            let annotation = TheaterAnnotation(coordinate: coordinate, title: theater.name, subtitle: theater.address)
+            let annotation = TheaterAnnotation(coordinate: coordinate, title: theater.name, subtitle: theater.url)
             
             mapView.addAnnotation(annotation)
         }
@@ -70,6 +70,38 @@ class TheatersMapViewController: UIViewController {
                 locationManager.requestWhenInUseAuthorization()
             case .restricted:
                 print("restrito")
+            }
+        }
+    }
+    
+    
+    
+    func getRoute(destination: CLLocationCoordinate2D)  {
+        let request = MKDirectionsRequest()
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.location!.coordinate))
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            if error == nil {
+                guard let response = response else {return}
+                
+                let routes = response.routes.sorted(by: {$0.expectedTravelTime < $1.expectedTravelTime})
+                guard let route = routes.first else {return}
+                print("Nome", route.name)
+                print("Distancia", route.distance)
+                print("Duração", route.expectedTravelTime)
+                print("Tipo de transporte", route.transportType)
+                
+                for step in route.steps {
+                    print("Em \(step.distance) metros, \(step.instructions)")
+                }
+                
+                self.mapView.removeOverlays(self.mapView.overlays)
+                self.mapView.add(route.polyline, level: .aboveRoads) //adicionando a rota no mapa
+                self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+                
+                
             }
         }
     }
@@ -115,7 +147,34 @@ extension TheatersMapViewController : XMLParserDelegate {
     }
 }
 
+// MARK: - MapView Delegate
 extension TheatersMapViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let camera = MKMapCamera()
+        camera.pitch = 80
+        camera.altitude = 100
+        camera.centerCoordinate = view.annotation!.coordinate
+        mapView.setCamera(camera, animated: true)
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            
+            renderer.strokeColor = #colorLiteral(red: 0.1977392788, green: 0.7777704613, blue: 0.8251090819, alpha: 1)
+            renderer.lineWidth = 7.0                                 
+            
+            return renderer
+            
+        } else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
+        
+    }
+    
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         var annotationView: MKAnnotationView!
@@ -126,15 +185,59 @@ extension TheatersMapViewController : MKMapViewDelegate {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Theater")
                 annotationView.image = UIImage(named: "theaterIcon")
                 annotationView.canShowCallout = true
+                
+                let btLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                btLeft.setImage(UIImage(named: "car"), for: .normal)
+                annotationView.leftCalloutAccessoryView = btLeft
+                
+                let btRight = UIButton(type: .detailDisclosure)
+                annotationView.rightCalloutAccessoryView = btRight
+                
+            } else {
+                annotationView.annotation = annotation
+            }
+            
+        } else if annotation is MKPointAnnotation {
+            annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "POI")
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "POI")
+                (annotationView as! MKPinAnnotationView).pinTintColor = .blue
+                (annotationView as! MKPinAnnotationView).animatesDrop = true
+                annotationView.canShowCallout = true
             } else {
                 annotationView.annotation = annotation
             }
             
         }
+        
+        
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.leftCalloutAccessoryView {
+            //tocamos no botão esquerdo
+            
+            getRoute(destination: view.annotation!.coordinate)
+            
+            
+        } else {
+            //tocamos no botão direito
+            
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController {
+                
+                vc.url = view.annotation!.subtitle!
+                present(vc, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
+// MARK: - CLLocationManager Delegate
 extension TheatersMapViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -153,8 +256,10 @@ extension TheatersMapViewController : CLLocationManagerDelegate {
     }
 }
 
+// MARK: - SearchBar Delegate
 extension TheatersMapViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBar.text!
         request.region = mapView.region
