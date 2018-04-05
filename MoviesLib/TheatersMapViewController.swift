@@ -32,6 +32,7 @@ class TheatersMapViewController: UIViewController {
         //ativar para caregar os cinemas
         //loadXML()
         
+        //recuperar o ponto através do endereco
         showAddress("Avenida Paulista, 1106, São Paulo")
         
         requestUserLocationAuthorization()
