@@ -309,7 +309,11 @@
                                 <items>
                                     <barButtonItem systemItem="rewind" id="teS-nA-eIi"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="inh-4m-fD8"/>
-                                    <barButtonItem title="Executar JS" id="tP6-SO-RIU"/>
+                                    <barButtonItem title="Executar JS" id="tP6-SO-RIU">
+                                        <connections>
+                                            <action selector="runJs:" destination="ilk-gT-cm3" id="uQS-aa-oIR"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="tTP-bJ-WQQ"/>
                                     <barButtonItem systemItem="fastForward" id="7SI-GW-y0z"/>
                                 </items>
@@ -331,6 +335,9 @@
                                     <constraint firstAttribute="height" constant="30" id="Udl-hw-vZh"/>
                                 </constraints>
                                 <state key="normal" title="Fechar"/>
+                                <connections>
+                                    <action selector="close:" destination="ilk-gT-cm3" eventType="touchUpInside" id="Rxa-qO-SOA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
